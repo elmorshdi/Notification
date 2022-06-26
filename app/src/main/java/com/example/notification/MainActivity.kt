@@ -1,9 +1,9 @@
 package com.example.notification
 
-import android.R
 import android.app.Notification
 import android.app.PendingIntent
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +26,12 @@ class MainActivity : AppCompatActivity() {
         binding.showNotificationButton.setOnClickListener {
             simple()
         }
+        binding.bigTextNotificationButton.setOnClickListener {
+            textExpanded()
+        }
+        binding.bigImageNotificationButton.setOnClickListener {
+            bigImage()
+        }
     }
 
     private fun simple() {
@@ -46,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ONE_ID)
-            .setSmallIcon(R.drawable.ic_notification_overlay)
+            .setSmallIcon(R.drawable.ic_baseline_notifications)
             .setContentTitle("My  Notification Title")
             .setContentText("My Notification Body")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -55,89 +61,64 @@ class MainActivity : AppCompatActivity() {
             .setContentIntent(contentIntent)
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
-            .addAction(R.drawable.arrow_down_float, "Toast", actionIntent)
+            .addAction(R.drawable.ic_baseline_music_note_24, "Toast", actionIntent)
             .build()
         notificationManager.notify(1, notification)
     }
-
-    /*@SuppressLint("RemoteViewLayout")
-    private fun simpleNotification() {
-        val channelID = "1000"
-        val clickIntent = Intent(this, NotificationReceiver::class.java)
-
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val contentView = RemoteViews(packageName, R.layout.music_notification)
-        contentView.setTextViewText(R.id.tvTitle, "My Custom Notification Title")
-        contentView.setTextViewText(R.id.tvDesc, "My Custom Notification Body")
-        contentView.setOnClickPendingIntent(R.id.backButton,clickPendingIntent(clickIntent,"BACK"))
-        contentView.setOnClickPendingIntent(R.id.forwardButton,clickPendingIntent(clickIntent,"FORWARD"))
-        contentView.setOnClickPendingIntent(R.id.playButton,clickPendingIntent(clickIntent,"PLAY"))
-
-        val builder = NotificationCompat.Builder(applicationContext,channelID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            // .setContentTitle("My Notification Title")
-            //  .setContentText("My Notification Body")
-            .setCustomContentView(contentView)
-
-        builder.setContent(contentView)
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelID, "Custom Notification", NotificationManager.IMPORTANCE_DEFAULT)
-
-            channel.enableVibration(true)
-            notificationManager.createNotificationChannel(channel)
-            builder.setChannelId(channelID)
-        }
-        val notification = builder.build()
-
-        notificationManager.notify(1000, notification)
-    }
-
-    private fun clickPendingIntent(clickIntent: Intent, action:String): PendingIntent? {
-        clickIntent.action = action
-        return PendingIntent.getBroadcast(
+    private fun textExpanded() {
+        val activityIntent = Intent(this, MainActivity::class.java)
+        val contentIntent = PendingIntent.getActivity(
             this,
-            0, clickIntent, FLAG_IMMUTABLE
+            0, activityIntent,
+            PendingIntent.FLAG_IMMUTABLE  // setting the mutability flag
+
         )
+        val largeIcon = BitmapFactory.decodeResource(resources, com.example.notification.R.drawable.download)
+
+        val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ONE_ID)
+            .setSmallIcon(com.example.notification.R.drawable.ic_baseline_notifications)
+            .setContentTitle("My  Notification Title")
+            .setContentText("My Notification Body")
+            .setLargeIcon(largeIcon)
+            .setStyle( NotificationCompat.BigTextStyle()
+                .bigText(getString(R.string.long_dummy_text))
+                .setBigContentTitle("Big Content Title")
+                .setSummaryText("Summary Text"))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+            .setColor(Color.BLUE)
+            .setContentIntent(contentIntent)
+            .setAutoCancel(true)
+              .build()
+        notificationManager.notify(2, notification)
     }
-*//*
-    private fun createNotif() {
-        val id = "my_channel_id_01"
-        val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            var channel = manager.getNotificationChannel(id)
-            if (channel == null) {
-                channel =
-                    NotificationChannel(id, "Channel Title", NotificationManager.IMPORTANCE_HIGH)
-                //config nofication channel
-                channel.description = "[Channel description]"
-                channel.enableVibration(true)
-                channel.vibrationPattern = longArrayOf(100, 1000, 200, 340)
-                channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
-                manager.createNotificationChannel(channel)
-            }
-        }
-        val notificationIntent = Intent(this, NoficationActivity::class.java)
-        notificationIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-        val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
-        val builder: NotificationCompat.Builder = NotificationCompat.Builder(this, id)
-            .setSmallIcon(R.drawable.icon)
-            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.bg))
+
+    private fun bigImage(){
+        val activityIntent = Intent(this, MainActivity::class.java)
+        val contentIntent = PendingIntent.getActivity(
+            this,
+            0, activityIntent, 0
+        )
+
+        val picture = BitmapFactory.decodeResource(resources, R.drawable.download)
+
+        val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ONE_ID)
+            .setSmallIcon(R.drawable.ic_baseline_notifications)
+            .setContentTitle("My  Notification Title")
+            .setContentText("My Notification Body")
+            .setLargeIcon(picture)
             .setStyle(
                 NotificationCompat.BigPictureStyle()
-                    .bigPicture(BitmapFactory.decodeResource(resources, R.drawable.bg))
+                    .bigPicture(picture)
                     .bigLargeIcon(null)
             )
-            .setContentTitle("Title")
-            .setContentText("Your text description")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setVibrate(longArrayOf(100, 1000, 200, 340))
-            .setAutoCancel(false) //true touch on notificaiton menu dismissed, but swipe to dismiss
-            .setTicker("Nofiication")
-        builder.setContentIntent(contentIntent)
-        val m = NotificationManagerCompat.from(applicationContext)
-        //id to generate new notification in list notifications menu
-        m.notify(Random().nextInt(), builder.build())
+            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+            .setContentIntent(contentIntent)
+            .setAutoCancel(true)
+            .setOnlyAlertOnce(true)
+            .build()
+
+        notificationManager.notify(3, notification)
     }
-*/
 }

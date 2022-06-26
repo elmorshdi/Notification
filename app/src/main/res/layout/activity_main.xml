@@ -21,15 +21,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/customNotificationButton" />
+            app:layout_constraintBottom_toTopOf="@id/bigTextNotificationButton" />
         <Button
-            android:id="@+id/customNotificationButton"
+            android:id="@+id/bigTextNotificationButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/show_simple_notification"
+            android:text="@string/big_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/showNotificationButton"
+            app:layout_constraintBottom_toTopOf="@id/bigImageNotificationButton" />
+        <Button
+            android:id="@+id/bigImageNotificationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/big_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bigTextNotificationButton"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
