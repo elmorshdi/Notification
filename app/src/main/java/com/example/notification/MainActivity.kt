@@ -1,17 +1,11 @@
 package com.example.notification
 
 import android.R
-import android.annotation.SuppressLint
 import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_IMMUTABLE
-import android.content.Context
 import android.content.Intent
-import android.os.Build
+import android.graphics.Color
 import android.os.Bundle
-import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -35,14 +29,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun simple() {
+        val activityIntent = Intent(this, MainActivity::class.java)
+        val contentIntent = PendingIntent.getActivity(
+            this,
+            0, activityIntent,
+            PendingIntent.FLAG_IMMUTABLE  // setting the mutability flag
+
+        )
+
+        val broadcastIntent = Intent(this, NotificationReceiver::class.java)
+        broadcastIntent.putExtra("toastMessage", "message")
+        val actionIntent = PendingIntent.getBroadcast(
+            this,
+            0, broadcastIntent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT // setting the mutability flag
+        )
+
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ONE_ID)
             .setSmallIcon(R.drawable.ic_notification_overlay)
             .setContentTitle("My  Notification Title")
             .setContentText("My Notification Body")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+             .setColor(Color.BLUE)
+            .setContentIntent(contentIntent)
+            .setAutoCancel(true)
+            .setOnlyAlertOnce(true)
+            .addAction(R.drawable.arrow_down_float, "Toast", actionIntent)
             .build()
-
         notificationManager.notify(1, notification)
     }
 
