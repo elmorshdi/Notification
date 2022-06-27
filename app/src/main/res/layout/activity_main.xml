@@ -11,43 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-
-
-        <Button
-            android:id="@+id/showNotificationButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/show_simple_notification"
-            app:layout_constraintStart_toStartOf="parent"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/navHostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bigTextNotificationButton" />
-        <Button
-            android:id="@+id/bigTextNotificationButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/big_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/showNotificationButton"
-            app:layout_constraintBottom_toTopOf="@id/bigImageNotificationButton" />
-        <Button
-            android:id="@+id/bigImageNotificationButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/big_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bigTextNotificationButton"
-            app:layout_constraintBottom_toTopOf="@+id/messagingWithReply" />
-        <Button
-            android:id="@+id/messagingWithReply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/messaging_with_replyc"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bigImageNotificationButton"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:navGraph="@navigation/nav_graph" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

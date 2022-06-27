@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Notification</string>
     <string name="show_simple_notification">Show Simple Notification</string>
-    <string name="long_dummy_text" >
+    <string name="long_dummy_text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed leo consectetur,
         iaculis felis non, porta urna. Integer vulputate nisl at massa facilisis fringilla.
         Ut egestas, eros placerat placerat accumsan, orci velit finibus sem, in placerat lorem dolor in odio.
@@ -17,4 +17,9 @@
     <string name="big_image">Big Image</string>
     <string name="messaging_with_reply">MESSAGING With REPLY</string>
     <string name="messaging_with_replyc">Messaging With Reply</string>
+    <string name="custom_notification">Custom Notification</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_fragment_notification">open Fragment Notification</string>
+    <string name="music_app_notification">music App Notification</string>
 </resources>
