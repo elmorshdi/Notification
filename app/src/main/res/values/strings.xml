@@ -15,4 +15,6 @@
     </string>
     <string name="big_text">Big Text</string>
     <string name="big_image">Big Image</string>
+    <string name="messaging_with_reply">MESSAGING With REPLY</string>
+    <string name="messaging_with_replyc">Messaging With Reply</string>
 </resources>
