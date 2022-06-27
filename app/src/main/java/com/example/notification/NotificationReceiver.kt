@@ -6,17 +6,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.RemoteInput
+import com.example.notification.fragment.HomeFragment
 
 
 class NotificationReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent) {
-        val message = intent.getStringExtra("toastMessage")
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-        val remoteInput: Bundle = RemoteInput.getResultsFromIntent(intent)
+        if (intent.getStringExtra("toastMessage")!=null){
+            val message = intent.getStringExtra("toastMessage")
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
 
+
+        val remoteInput: Bundle = RemoteInput.getResultsFromIntent(intent)
         val replyText = remoteInput.getCharSequence("key_text_reply")
         val answer = Message(replyText!!, null)
-        MainActivity.MESSAGES.add(answer)
-        messagingWithReply(context!!)
+        HomeFragment.MESSAGES.add(answer)
     }
 }
