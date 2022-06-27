@@ -22,10 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var notificationManager: NotificationManagerCompat
     private var mediaSession: MediaSessionCompat? = null
 companion object{
-  M
-    fun messagingWithReplyCompanion() {
-        TODO("Not yet implemented")
-    }
 
     var MESSAGES :ArrayList<Message> = ArrayList()
 
@@ -51,7 +47,7 @@ companion object{
         }
         binding.messagingWithReply.setOnClickListener {
 
-            messagingWithReply()
+            messagingWithReply(context = this)
         }
     }
 
@@ -147,58 +143,6 @@ companion object{
         notificationManager.notify(3, notification)
     }
 
-     fun messagingWithReply() {
-        val activityIntent = Intent(this, MainActivity::class.java)
-        val contentIntent = PendingIntent.getActivity(
-            this,
-            0, activityIntent,
-            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT  // setting the mutability flag
-        )
-        val remoteInput: RemoteInput = RemoteInput.Builder("key_text_reply")
-            .setLabel("Your answer...")
-            .build()
-        val replyIntent: Intent
-        var replyPendingIntent: PendingIntent? = null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            replyIntent = Intent(this, NotificationReceiver::class.java)
-            replyPendingIntent = PendingIntent.getBroadcast(
-                this,
-                0, replyIntent,
-                PendingIntent.FLAG_MUTABLE // setting the mutability flag
-            )
-        } else {
-            //start chat activity instead (PendingIntent.getActivity)
-            //cancel notification with notificationManagerCompat.cancel(id)
-        }
-        val replyAction: NotificationCompat.Action = NotificationCompat.Action.Builder(
-            com.example.notification.R.drawable.ic_baseline_notifications,
-            "Reply",
-            replyPendingIntent
-        ).addRemoteInput(remoteInput).build()
-        val messagingStyle = NotificationCompat.MessagingStyle("Me")
-        messagingStyle.conversationTitle = "Group Chat"
-        for (chatMessage in MESSAGES) {
-            val notificationMessage = NotificationCompat.MessagingStyle.Message(
-                chatMessage.text,
-                chatMessage.timestamp,
-                chatMessage.sender
-            )
-            messagingStyle.addMessage(notificationMessage)
-        }
-        val notification: Notification = NotificationCompat.Builder(applicationContext, CHANNEL_ONE_ID)
-            .setSmallIcon(R.drawable.ic_baseline_notifications)
-            .setStyle(messagingStyle)
-            .addAction(replyAction)
-            .setColor(Color.BLUE)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-            .setContentIntent(contentIntent)
-            .setAutoCancel(true)
-            .setOnlyAlertOnce(true)
-            .build()
-        val notificationManager = NotificationManagerCompat.from(applicationContext)
-        notificationManager.notify(4, notification)
-    }
     }
 
 

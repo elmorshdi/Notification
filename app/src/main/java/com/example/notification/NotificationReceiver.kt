@@ -17,6 +17,6 @@ class NotificationReceiver : BroadcastReceiver() {
         val replyText = remoteInput.getCharSequence("key_text_reply")
         val answer = Message(replyText!!, null)
         MainActivity.MESSAGES.add(answer)
-        MainActivity.messagingWithReplyCompanion()
+        messagingWithReply(context!!)
     }
 }
