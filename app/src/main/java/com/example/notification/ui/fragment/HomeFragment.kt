@@ -1,4 +1,4 @@
-package com.example.notification.fragment
+package com.example.notification.ui.fragment
 
 import android.app.PendingIntent
 import android.content.Intent
@@ -17,6 +17,7 @@ import androidx.navigation.NavDeepLinkBuilder
 import com.example.notification.*
 import com.example.notification.MyApp.Companion.CHANNEL_ONE_ID
 import com.example.notification.databinding.FragmentHomeBinding
+import com.example.notification.ui.MainActivity
 
 
 class HomeFragment : Fragment() {
@@ -82,7 +83,7 @@ class HomeFragment : Fragment() {
             )
             collapsedView.setTextViewText(R.id.text_view_collapsed_1, "Hello World!")
 
-            // collapsedView initialize
+            // expandedView initialize
             val expandedView = RemoteViews(
                 requireContext().packageName,
                 R.layout.notification_expanded
@@ -132,16 +133,17 @@ class HomeFragment : Fragment() {
             /* initialize PendingIntent for reply button
              in sdk N or above notification can update its content
             */
-            val replyPendingIntent: PendingIntent? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                PendingIntent.getBroadcast(
-                    context,
-                    0, Intent(context, NotificationReceiver::class.java),
-                    PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT// setting the mutability flag
-                )
-            } else {
-                //start chat activity instead (PendingIntent.getActivity)
-                clickPendingIntent
-            }
+            val replyPendingIntent: PendingIntent? =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    PendingIntent.getBroadcast(
+                        context,
+                        0, Intent(context, NotificationReceiver::class.java),
+                        PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT// setting the mutability flag
+                    )
+                } else {
+                    //start chat activity instead (PendingIntent.getActivity)
+                    clickPendingIntent
+                }
 
             // remoteInput initialize
             val remoteInput: RemoteInput = RemoteInput.Builder("key_text_reply")
