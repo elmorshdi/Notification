@@ -1,4 +1,4 @@
-package com.example.notification
+package com.example.notification.ui
 
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat

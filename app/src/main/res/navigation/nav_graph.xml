@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/oneFragment"
-        android:name="com.example.notification.fragment.OneFragment"
+        android:name="com.example.notification.ui.fragment.OneFragment"
         android:label="fragment_one"
         tools:layout="@layout/fragment_one" >
         <argument
@@ -18,6 +18,6 @@
     <fragment
         tools:layout="@layout/fragment_home"
         android:id="@+id/homeFragment"
-        android:name="com.example.notification.fragment.HomeFragment"
+        android:name="com.example.notification.ui.fragment.HomeFragment"
         android:label="HomeFragment" />
 </navigation>

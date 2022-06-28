@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.RemoteInput
-import com.example.notification.fragment.HomeFragment
+import com.example.notification.ui.fragment.HomeFragment
 
 
 class NotificationReceiver : BroadcastReceiver() {

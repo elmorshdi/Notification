@@ -1,12 +1,10 @@
-package com.example.notification.fragment
+package com.example.notification.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.navigation.fragment.navArgs
 import com.example.notification.R
 
 
