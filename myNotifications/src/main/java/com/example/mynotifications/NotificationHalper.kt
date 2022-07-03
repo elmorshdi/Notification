@@ -1,4 +1,4 @@
-package com.example.notification
+package com.example.mynotifications
 
 import android.app.PendingIntent
 import android.content.Context

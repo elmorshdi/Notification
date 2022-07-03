@@ -1,7 +1,9 @@
 package com.example.notification.ui.fragment
 
-import android.app.PendingIntent
+ import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
@@ -14,7 +16,9 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.RemoteInput
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDeepLinkBuilder
-import com.example.notification.*
+ import com.example.mynotifications.customNotification
+ import com.example.mynotifications.simpleNotification
+ import com.example.notification.*
 import com.example.notification.MyApp.Companion.CHANNEL_ONE_ID
 import com.example.notification.databinding.FragmentHomeBinding
 import com.example.notification.ui.MainActivity
